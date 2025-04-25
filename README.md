@@ -1,50 +1,73 @@
-# Welcome to your Expo app 👋
+# App Directory Structure
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This app uses a route-based authentication system with the following structure:
 
-## Get started
+## Route Groups
 
-1. Install dependencies
+- `(public)` - Routes accessible without authentication
+  - `onboarding` - Single page for first-time users
+  - `sign-in` - Login page
+  - `sign-up` - Multi-step registration process
+    - Step 1: Email and password
+    - Step 2: Phone number
+    - Step 3: Password confirmation
+    - Step 4: Email verification
 
-   ```bash
-   npm install
-   ```
+- `(private)` - Routes requiring authentication
+  - Tab-based navigation for main app features:
+    - `posts` - User posts
+    - `store` - Store section
+    - `feed` - News feed
+    - `settings` - User settings
+    - `statistics` - User statistics
 
-2. Start the app
+## Authentication
 
-   ```bash
-    npx expo start
-   ```
+Authentication is handled through the `services/auth.ts` file which provides:
+- Login
+- Registration
+- Email availability check
+- 2FA for registration
+- Token management
 
-In the output, you'll find options to open the app in a
+## Services
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+The `services` directory contains modular service files for different features:
+- `auth.ts` - Authentication related services
+- Future services will be added for:
+  - User management
+  - Posts
+  - Products
+  - etc.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Validations
 
-## Get a fresh project
+The `validations` directory contains all form validation logic:
+- `auth.ts` - Authentication form validations
+- `user.ts` - User profile validations
+- etc.
 
-When you're ready, run:
+## Styling
 
+This project uses NativeWind for styling:
+- All styles are written using Tailwind CSS classes
+- Custom styles can be added in `tailwind.config.js`
+- Components use className prop for styling
+
+## Setup
+
+1. Install dependencies:
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Start the development server:
+```bash
+npm start
+```
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+3. Run on your device:
+```bash
+npm run android # for Android
+npm run ios # for iOS
+``` 
