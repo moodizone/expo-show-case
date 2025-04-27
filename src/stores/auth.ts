@@ -7,7 +7,7 @@ import {
   checkEmailAvailability,
   verify2FA,
   checkAuthStatus,
-} from "@/app/services/auth";
+} from "@/services/auth";
 
 interface AuthState {
   readonly token: string | null;

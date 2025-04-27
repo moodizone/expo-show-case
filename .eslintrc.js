@@ -1,3 +1,4 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   extends: [
     'expo',
@@ -5,9 +6,18 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
   ],
   plugins: ['react-hooks', '@typescript-eslint'],
-  ignorePatterns: ['/dist/*'],
+  ignorePatterns: [
+    '**/*.js',
+    'dist/',
+    'node_modules/',
+  ],
   rules: {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
   },
+  overrides: [
+    {
+      files: ['src/**/*.{ts,tsx}'],
+    },
+  ],
 };
