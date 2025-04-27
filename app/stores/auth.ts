@@ -7,12 +7,12 @@ import {
   checkEmailAvailability,
   verify2FA,
   checkAuthStatus,
-} from "@/services/auth";
+} from "@/app/services/auth";
 
 interface AuthState {
   readonly token: string | null;
   readonly isAuthenticated: boolean;
-  user: any | null;
+  user: unknown | null;
   isLoading: boolean;
   error: string | null;
   hasSeenOnboarding: boolean;
@@ -48,8 +48,8 @@ export const useAuthStore = create<AuthState>((set) => ({
           user: response.user,
           isLoading: false,
         });
-      } catch (error: any) {
-        set({ error: error.message, isLoading: false });
+      } catch (error: unknown) {
+        set({ error: (error as Error).message, isLoading: false });
         throw error;
       }
     },
@@ -77,8 +77,8 @@ export const useAuthStore = create<AuthState>((set) => ({
         const available = await checkEmailAvailability(email);
         set({ isLoading: false });
         return available;
-      } catch (error: any) {
-        set({ error: error.message, isLoading: false });
+      } catch (error: unknown) {
+        set({ error: (error as Error).message, isLoading: false });
         throw error;
       }
     },
@@ -94,8 +94,8 @@ export const useAuthStore = create<AuthState>((set) => ({
           user: response.user,
           isLoading: false,
         });
-      } catch (error: any) {
-        set({ error: error.message, isLoading: false });
+      } catch (error: unknown) {
+        set({ error: (error as Error).message, isLoading: false });
         throw error;
       }
     },
@@ -119,8 +119,8 @@ export const useAuthStore = create<AuthState>((set) => ({
           user: response.user,
           isLoading: false,
         });
-      } catch (error: any) {
-        set({ error: error.message, isLoading: false });
+      } catch (error: unknown) {
+        set({ error: (error as Error).message, isLoading: false });
         throw error;
       }
     },
