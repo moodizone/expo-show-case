@@ -1,5 +1,3 @@
-import { create } from "zustand";
-
 export async function login(email: string, password: string) {
   const response = await fetch(`/auth/login`, {
     method: "POST",

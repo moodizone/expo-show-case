@@ -10,8 +10,8 @@ import {
 } from "@/services/auth";
 
 interface AuthState {
-  token: string | null;
-  isAuthenticated: boolean;
+  readonly token: string | null;
+  readonly isAuthenticated: boolean;
   user: any | null;
   isLoading: boolean;
   error: string | null;
