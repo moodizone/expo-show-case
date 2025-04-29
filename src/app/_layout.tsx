@@ -1,13 +1,16 @@
 import * as React from "react";
 import { Slot } from "expo-router";
-import { useAuthStore } from "@/stores/auth";
+
+import "../../global.css";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import AuthProvider from "@/components/AuthProvider";
 
 export default function RootLayout() {
-  const { isAuthenticated, isLoading, actions } = useAuthStore();
-
-  React.useEffect(() => {
-    if (isAuthenticated) {
-    }
-  }, []);
-  return <Slot />;
+  return (
+    <SafeAreaProvider>
+      <AuthProvider>
+        <Slot />
+      </AuthProvider>
+    </SafeAreaProvider>
+  );
 }
