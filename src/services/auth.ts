@@ -26,7 +26,7 @@ export async function verify2FA(code: string) {
     body: JSON.stringify({ code }),
   });
 }
-export async function checkAuthStatus(token: string | null) {
+export async function checkAuthStatus(token: string) {
   return apiFetch<VerifyResponse>(`/auth/status`, {
     headers: {
       Authorization: `Bearer ${token}`,
