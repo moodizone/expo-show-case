@@ -59,7 +59,14 @@ module.exports = {
           2: '#E4E9F3',
           3: '#D8D8D8',
         }
-      }
+      },
+      fontFamily: {
+        thin: ["thin"],
+        regular: ["regular"],
+        semibold: ["semibold"],
+        bold: ["bold"],
+        heavy: ["heavy"],
+      },
     }
   },
   plugins: [],
