@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const BASE_URL = "http://localhost:3006/api";
+export const BASE_URL = "http://192.168.8.102:3006/api";
+// export const BASE_URL = "http://localhost:3006/api";
 
 export class APIError extends Error {
   response: Response;

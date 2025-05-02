@@ -6,7 +6,11 @@ import "../../global.css";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AuthProvider from "@/components/AuthProvider";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { throwOnError: true, retry: false },
+  },
+});
 
 export default function RootLayout() {
   return (

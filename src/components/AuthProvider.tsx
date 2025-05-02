@@ -9,14 +9,19 @@ function AuthProvider({ children }: React.PropsWithChildren) {
   const { isLoading } = useQuery({
     queryKey: ["auth"],
     async queryFn() {
-      const token = await AsyncStorage.getItem("token");
+      try {
+        const token = await AsyncStorage.getItem("token");
 
-      if (token) {
-        const result = await checkAuthStatus(token);
-        return result.success;
+        if (token) {
+          const result = await checkAuthStatus(token);
+          return result.success;
+        }
+
+        return false;
+      } catch {
+        // ignore errors
+        return false;
       }
-
-      return false;
     },
   });
 
