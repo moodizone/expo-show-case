@@ -3,10 +3,11 @@ import { Slot } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import "../../global.css";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import AuthProvider from "@/components/AuthProvider";
+import AuthProvider from "@/hoc/AuthProvider";
+import { ThemeProvider } from "@/hoc/ThemeProvider";
 import thin from "../../assets/fonts/SF-Pro-Display-Thin.otf";
 import regular from "../../assets/fonts/SF-Pro-Display-Regular.otf";
 import semibold from "../../assets/fonts/SF-Pro-Display-Semibold.otf";
@@ -22,7 +23,7 @@ const queryClient = new QueryClient({
 });
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
+  const [fontLoaded, fontErrors] = useFonts({
     thin,
     regular,
     semibold,
@@ -30,23 +31,19 @@ export default function RootLayout() {
     heavy,
   });
 
-  React.useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
-
-  if (!loaded && !error) {
+  if (!fontLoaded && !fontErrors) {
     return null;
   }
 
   return (
-    <SafeAreaProvider>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <Slot />
-        </AuthProvider>
-      </QueryClientProvider>
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <Slot />
+          </AuthProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 }
