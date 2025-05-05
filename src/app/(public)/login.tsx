@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { Button, Text } from "react-native";
 import { useQueryClient } from "@tanstack/react-query";
 
-import ScreenProvider from "@/hoc/ScreenProvider";
+import ScreenProvider from "@/components/hoc/ScreenProvider";
 import { ROUTES } from "@/routes";
 
 function Login() {

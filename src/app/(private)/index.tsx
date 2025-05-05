@@ -1,8 +1,16 @@
 import * as React from "react";
 import { Text } from "react-native";
+import { useColorScheme } from "nativewind";
 
-function index() {
-  return <Text>"this is index"</Text>;
+import ScreenProvider from "@/components/hoc/ScreenProvider";
+
+function Home() {
+  const { colorScheme } = useColorScheme();
+  return (
+    <ScreenProvider>
+      <Text className="text-gray-900 dark:text-gray-50">{colorScheme}</Text>
+    </ScreenProvider>
+  );
 }
 
-export default index;
+export default Home;

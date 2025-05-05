@@ -6,8 +6,8 @@ import { useFonts } from "expo-font";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import "../../global.css";
-import AuthProvider from "@/hoc/AuthProvider";
-import { ThemeProvider } from "@/hoc/ThemeProvider";
+import AuthProvider from "@/components/hoc/AuthProvider";
+import { ThemeProvider } from "@/components/hoc/ThemeProvider";
 import thin from "../../assets/fonts/SF-Pro-Display-Thin.otf";
 import regular from "../../assets/fonts/SF-Pro-Display-Regular.otf";
 import semibold from "../../assets/fonts/SF-Pro-Display-Semibold.otf";
