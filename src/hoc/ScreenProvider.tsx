@@ -12,8 +12,8 @@ function ScreenProvider({ children }: React.PropsWithChildren) {
         barStyle={colorScheme === "light" ? "dark-content" : "light-content"}
         backgroundColor={colorScheme === "light" ? "#ffffff" : "#22343C"}
       />
-      <Text className="p-3 bg-red-300">{`Pathname: ${pathname}`}</Text>
-      <View className="p-3">
+      <View className="p-3 justify-between flex-row gap-3">
+        <Text className="p-3 text-gray-950 dark:text-gray-50">{`Pathname: ${pathname}`}</Text>
         <Button
           onPress={toggleColorScheme}
           title={colorScheme ?? "toggle"}
