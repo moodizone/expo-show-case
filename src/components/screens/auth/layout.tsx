@@ -1,6 +1,6 @@
 import * as React from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { Text, View } from "react-native";
+import { KeyboardAvoidingView, Platform, Text, View } from "react-native";
 
 import ScreenProvider from "@/components/hoc/ScreenProvider";
 
@@ -32,10 +32,14 @@ function AuthLayout({
         ) : null}
         {description ? (
           <Text className="mb-9 text-gray-300 dark:text-gray-200 text-[24px] font-bold">
-            {"Sign in to continue"}
+            {description}
           </Text>
         ) : null}
-        {children}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+        >
+          {children}
+        </KeyboardAvoidingView>
       </View>
     </ScreenProvider>
   );
