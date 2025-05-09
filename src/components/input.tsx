@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { twMerge } from "tailwind-merge";
 
 interface InputProps extends TextInputProps {
   error?: string;
@@ -24,7 +25,7 @@ export default function Input({
   const [secure, setSecure] = React.useState(props.secureTextEntry);
 
   return (
-    <View className={className}>
+    <View className={twMerge("w-full", className)}>
       <View className="relative">
         <TextInput
           {...props}
