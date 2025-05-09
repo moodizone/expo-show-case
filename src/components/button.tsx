@@ -1,12 +1,6 @@
 import { darkenHexColor } from "@/utils/color";
 import * as React from "react";
-import {
-  ActivityIndicator,
-  Pressable,
-  PressableProps,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
+import { ActivityIndicator, Pressable, PressableProps } from "react-native";
 import Animated, {
   interpolateColor,
   useAnimatedStyle,
