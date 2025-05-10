@@ -43,6 +43,7 @@ function Password() {
                   secureToggle
                   autoCorrect={false}
                   error={errors.password?.message}
+                  returnKeyType="next"
                 />
               )}
               name="password"

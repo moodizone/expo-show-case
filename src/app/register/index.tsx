@@ -39,6 +39,7 @@ function RegisterRoot() {
                   placeholder="Your full name"
                   className="mb-9"
                   error={errors.name?.message}
+                  returnKeyType="next"
                 />
               )}
               name="name"
