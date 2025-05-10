@@ -1,16 +1,10 @@
 import * as React from "react";
-import { Text } from "react-native";
-import { useColorScheme } from "nativewind";
+import { Redirect } from "expo-router";
 
-import ScreenProvider from "@/components/hoc/ScreenProvider";
+import { ROUTES } from "@/routes";
 
 function Home() {
-  const { colorScheme } = useColorScheme();
-  return (
-    <ScreenProvider>
-      <Text className="text-gray-900 dark:text-gray-50">{colorScheme}</Text>
-    </ScreenProvider>
-  );
+  return <Redirect href={ROUTES.login} />;
 }
 
 export default Home;

@@ -11,8 +11,12 @@ import { SliderItem } from "@/components/screens/onboarding/item";
 import { Desc } from "@/components/screens/onboarding/Desc";
 import { Pagination } from "@/components/screens/onboarding/pagination";
 import { data } from "@/components/screens/onboarding/data";
+import Footer from "@/components/screens/auth/footer";
+import { useRouter } from "expo-router";
+import { ROUTES } from "@/routes";
 
 function Onboarding() {
+  const router = useRouter();
   const scrollX = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler({
     onScroll(event) {
@@ -41,6 +45,12 @@ function Onboarding() {
         />
         <Desc scrollX={scrollX} />
         <Pagination scrollX={scrollX} />
+        <View className="px-8 mt-8">
+          <Footer
+            backHandler={() => router.dismiss()}
+            nextHandler={() => router.push(ROUTES.posts)}
+          />
+        </View>
       </View>
     </ScreenProvider>
   );

@@ -13,6 +13,7 @@ export const ROUTES = {
     },
   },
   onboarding: "/onboarding",
+  posts: "/posts",
 } as const;
 
 export const publicRoutes = [

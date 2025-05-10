@@ -60,7 +60,7 @@ export function Dot({ index, scrollX }: DotProps) {
 
 export function Pagination({ scrollX }: PaginationProps) {
   return (
-    <View className="flex-row justify-center mt-8">
+    <View className="flex-row justify-center">
       {Array.from({ length: data.length }).map((_, i) => (
         <Dot key={i} index={i} scrollX={scrollX} />
       ))}

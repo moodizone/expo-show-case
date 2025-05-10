@@ -1,7 +1,11 @@
 import * as React from "react";
 import Svg, { Circle, Rect } from "react-native-svg";
 import { LayoutChangeEvent, Text, View } from "react-native";
+
+import { Link } from "expo-router";
+
 import ScreenProvider from "@/components/hoc/ScreenProvider";
+import { ROUTES } from "@/routes";
 
 function Hi() {
   const [size, setSize] = React.useState({ width: 0, height: 0 });
@@ -12,7 +16,7 @@ function Hi() {
   };
 
   return (
-    <ScreenProvider hide bg="#FF575F">
+    <ScreenProvider bg="#FF575F">
       <View style={{ flex: 1, backgroundColor: "#FF575F" }} onLayout={onLayout}>
         {size.width > 0 && size.height > 0 && (
           <View className="absolute w-full h-full">
@@ -76,6 +80,12 @@ function Hi() {
               "Marvie is your top-notch multipurpose UI kit with bright and friendly colors. Full-featured and handy. Trendy and eye-catching. Created with care of designers and users."
             }
           </Text>
+          <Link
+            href={ROUTES.onboarding}
+            className="text-[14px] leading-[24px] font-medium text-white mt-4"
+          >
+            {"Go to onboarding"}
+          </Link>
         </View>
       </View>
     </ScreenProvider>

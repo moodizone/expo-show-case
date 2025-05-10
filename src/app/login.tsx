@@ -12,6 +12,7 @@ import LabelIcon from "@/components/screens/auth/labelIcon";
 import { loginSchema } from "@/validations/auth";
 import { Button } from "@/components/button";
 import { ROUTES } from "@/routes";
+import Footer from "@/components/screens/auth/footer";
 
 export type FormValues = z.infer<typeof loginSchema>;
 
