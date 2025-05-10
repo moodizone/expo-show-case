@@ -16,7 +16,6 @@ function RegisterLayout() {
       password: "",
       confirmPassword: "",
       phone: "",
-      twoFACode: "",
     },
     mode: "onBlur",
     shouldFocusError: false,
@@ -34,6 +33,20 @@ function RegisterLayout() {
         <Stack.Screen name="phone" />
         <Stack.Screen name="password" />
         <Stack.Screen name="faceId" />
+        <Stack.Screen
+          name="modal/2fa"
+          options={{
+            presentation: "transparentModal",
+            animation: "fade",
+          }}
+        />
+        <Stack.Screen
+          name="modal/faceId"
+          options={{
+            presentation: "transparentModal",
+            animation: "fade",
+          }}
+        />
       </Stack>
     </FormProvider>
   );
