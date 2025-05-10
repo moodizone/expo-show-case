@@ -62,7 +62,7 @@ function Password() {
         <View className="mt-16">
           <Footer
             backHandler={() => {
-              router.dismissTo(ROUTES.register.password);
+              router.dismiss();
             }}
             nextHandler={() => router.push(ROUTES.register.modal.twoFA)}
           />

@@ -9,7 +9,7 @@ export const ROUTES = {
     faceId: "/register/faceId",
     modal: {
       twoFA: "/register/modal/2fa",
-      faceId: "/register/modal/faceIs",
+      faceId: "/register/modal/faceId",
     },
   },
   onboarding: "/onboarding",

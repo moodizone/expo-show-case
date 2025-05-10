@@ -78,7 +78,7 @@ function Password() {
         <View className="mt-16">
           <Footer
             backHandler={() => {
-              router.dismissTo(ROUTES.register.root);
+              router.dismiss();
             }}
             nextHandler={() => router.push(ROUTES.register.phone)}
           />
