@@ -20,7 +20,7 @@ interface DotProps {
   scrollX: SharedValue<number>;
 }
 
-const { width } = Dimensions.get("screen");
+const { width } = Dimensions.get("window");
 
 export function Dot({ index, scrollX }: DotProps) {
   const { colorScheme } = useColorScheme();

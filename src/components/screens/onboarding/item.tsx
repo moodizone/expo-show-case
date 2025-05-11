@@ -14,7 +14,7 @@ interface Props {
   scrollX: SharedValue<number>;
 }
 
-const { width } = Dimensions.get("screen");
+const { width } = Dimensions.get("window");
 
 export function SliderItem({ index, scrollX }: Props) {
   const animatedStyles = useAnimatedStyle(() => ({

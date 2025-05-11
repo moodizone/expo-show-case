@@ -16,7 +16,7 @@ interface DetailsProps {
   index: number;
 }
 
-const { width } = Dimensions.get("screen");
+const { width } = Dimensions.get("window");
 
 function Details({ scrollX, index }: DetailsProps) {
   const animatedStyle = useAnimatedStyle(() => {
