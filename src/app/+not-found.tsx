@@ -1,8 +1,14 @@
 import * as React from "react";
 import { Text } from "react-native";
 
+import ScreenProvider from "@/components/hoc/ScreenProvider";
+
 function NotFound() {
-  return <Text>404 goes here</Text>;
+  return (
+    <ScreenProvider>
+      <Text>404 goes here</Text>
+    </ScreenProvider>
+  );
 }
 
 export default NotFound;

@@ -13,6 +13,7 @@ import regular from "../../assets/fonts/SF-Pro-Display-Regular.otf";
 import semibold from "../../assets/fonts/SF-Pro-Display-Semibold.otf";
 import bold from "../../assets/fonts/SF-Pro-Display-Bold.otf";
 import heavy from "../../assets/fonts/SF-Pro-Display-Heavy.otf";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,7 +41,9 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <ThemeProvider>
           <AuthProvider>
-            <Slot />
+            <GestureHandlerRootView>
+              <Slot />
+            </GestureHandlerRootView>
           </AuthProvider>
         </ThemeProvider>
       </SafeAreaProvider>
