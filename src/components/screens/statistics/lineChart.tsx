@@ -154,7 +154,7 @@ export function AreaPath({
     </Path>
   );
 }
-export default function LineChart({
+export function LineChart({
   data,
   height,
   width,
@@ -282,7 +282,6 @@ export default function LineChart({
         ) : null}
         {selectedPoint ? (
           <>
-            padding padding padding padding
             <BulletPoint
               cx={selectedPoint?.x}
               cy={selectedPoint?.y}
