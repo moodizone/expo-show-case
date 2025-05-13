@@ -59,10 +59,10 @@ interface LineChartProps {
   width: number;
   height: number;
   padding?: {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
   };
   grid?: {
     color: string;
@@ -164,10 +164,16 @@ export default function LineChart({
   gradient,
   fontSize = 12,
   labelColor = "#899A96",
-  padding = { top: 35, left: 20, right: 20, bottom: 20 },
+  padding,
 }: LineChartProps) {
-  const chartWidth = width - padding.left - padding.right;
-  const chartHeight = height - padding.top - padding.bottom;
+  const pd = {
+    top: padding?.top ?? 35,
+    left: padding?.left ?? 20,
+    right: padding?.right ?? 20,
+    bottom: padding?.bottom ?? 20,
+  };
+  const chartWidth = width - pd.left - pd.right;
+  const chartHeight = height - pd.top - pd.bottom;
   const font = useFont(sf, fontSize);
   const [selectedPoint, setSelectedPoint] = React.useState<ChartPoint | null>(
     null
@@ -184,8 +190,8 @@ export default function LineChart({
     .nice(gridCount)
     .range([chartHeight, 0]);
   const points = data.map((d) => ({
-    x: xScale(d.x) + padding.left,
-    y: yScale(d.y) + padding.top,
+    x: xScale(d.x) + pd.left,
+    y: yScale(d.y) + pd.top,
     original: d,
   }));
   const yTicks = yScale.ticks(gridCount);
@@ -195,7 +201,7 @@ export default function LineChart({
     .curve(curveCatmullRom);
   const areaGenerator = d3Area<{ x: number; y: number }>()
     .x((d) => d.x)
-    .y0(chartHeight + padding.top)
+    .y0(chartHeight + pd.top)
     .y1((d) => d.y)
     .curve(curveCatmullRom);
 
@@ -233,13 +239,13 @@ export default function LineChart({
   // Subcomponents
   //================================
   const gridLines = yTicks.map((tick, i) => {
-    const y = yScale(tick) + padding.top;
+    const y = yScale(tick) + pd.top;
 
     return (
       <GridLine
         key={`grid-${i}`}
-        p1={{ x: padding.left, y }}
-        p2={{ x: width - padding.right, y }}
+        p1={{ x: pd.left, y }}
+        p2={{ x: width - pd.right, y }}
         text={`${tick / 1000}k`}
         x={fontSize / 3}
         y={y + fontSize / 3}
@@ -269,14 +275,19 @@ export default function LineChart({
         {areaPath && gradient ? (
           <AreaPath
             path={areaPath}
-            start={vec(padding.left, padding.top)}
-            end={vec(padding.left, padding.top + chartHeight)}
+            start={vec(pd.left, pd.top)}
+            end={vec(pd.left, pd.top + chartHeight)}
             colors={gradient}
           />
         ) : null}
         {selectedPoint ? (
           <>
-            <BulletPoint cx={selectedPoint?.x} cy={selectedPoint?.y} />
+            padding padding padding padding
+            <BulletPoint
+              cx={selectedPoint?.x}
+              cy={selectedPoint?.y}
+              strokeColor={accent}
+            />
             <Tooltip
               x={selectedPoint?.x}
               y={selectedPoint?.y}
