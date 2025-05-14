@@ -2,18 +2,11 @@ import * as React from "react";
 import {
   Blur,
   Canvas,
-  Color,
-  DashPathEffect,
   Group,
-  Line,
-  LinearGradient,
   Path,
   PathDef,
-  SkFont,
-  SkPath,
   SkPoint,
   Skia,
-  Text as SkiaText,
   useFont,
   vec,
 } from "@shopify/react-native-skia";
@@ -24,34 +17,20 @@ import {
   GestureDetector,
   PanGestureHandlerEventPayload,
 } from "react-native-gesture-handler";
-import { line as d3Line, area as d3Area, curveCatmullRom } from "d3-shape";
+import { line as d3Line, curveCatmullRom } from "d3-shape";
 import { scaleLinear } from "d3-scale";
 
 import sf from "../../../../assets/fonts/SF-Pro-Display-Regular.otf";
 import { Tooltip } from "@/components/screens/statistics/tooltip";
 import { BulletPoint } from "@/components/screens/statistics/bullet";
+import { GridLine } from "@/components/screens/statistics/grid";
+import { areaGenerator, AreaPath } from "@/components/screens/statistics/area";
+import { findNearestPoint } from "@/components/screens/statistics/utils";
 
 interface LinePathProps {
   color?: string;
   path: PathDef;
   blur?: number;
-  strokeWidth?: number;
-}
-interface AreaPathProps {
-  start: SkPoint;
-  end: SkPoint;
-  colors?: Color[];
-  path: SkPath;
-}
-interface GridLineProps {
-  p1: SkPoint;
-  p2: SkPoint;
-  text: string;
-  x: number;
-  y: number;
-  font: SkFont | null;
-  lineColor?: string;
-  textColor?: string;
   strokeWidth?: number;
 }
 interface LineChartProps {
@@ -74,36 +53,15 @@ interface LineChartProps {
   labelColor?: string;
   onTap?(point: SkPoint): void;
 }
-interface ChartPoint extends SkPoint {
+export interface ChartPoint extends SkPoint {
   original: SkPoint;
 }
 
-export function GridLine({
-  p1,
-  p2,
-  text,
-  x,
-  y,
-  font,
-  lineColor = "#E4E9F3",
-  textColor = "#E4E9F3",
-  strokeWidth = 1,
-}: GridLineProps) {
-  return (
-    <React.Fragment>
-      <Line
-        p1={p1}
-        p2={p2}
-        color={lineColor}
-        strokeWidth={strokeWidth}
-        strokeJoin="round"
-        style="stroke"
-      >
-        <DashPathEffect intervals={[6, 6]} phase={0} />
-      </Line>
-      <SkiaText x={x} y={y} text={text} font={font} color={textColor} />
-    </React.Fragment>
-  );
+function lineGenerator() {
+  return d3Line<SkPoint>()
+    .x((d) => d.x)
+    .y((d) => d.y)
+    .curve(curveCatmullRom);
 }
 export function LinePath({
   path,
@@ -142,18 +100,6 @@ export function LinePath({
     </Group>
   );
 }
-export function AreaPath({
-  end,
-  start,
-  colors = ["#3DD598ff", "#3DD59805"],
-  path,
-}: AreaPathProps) {
-  return (
-    <Path path={path}>
-      <LinearGradient start={start} end={end} colors={colors} />
-    </Path>
-  );
-}
 export function LineChart({
   data,
   height,
@@ -181,52 +127,63 @@ export function LineChart({
   const gridCount = grid?.count ?? 4;
   const gridColor = grid?.color ?? "#E4E9F3";
 
-  // normalize data
-  const xBounds = extent(data, (d) => d.x) as [number, number];
-  const yBounds = extent(data, (d) => d.y) as [number, number];
-  const xScale = scaleLinear().domain(xBounds).range([0, chartWidth]);
-  const yScale = scaleLinear()
-    .domain(yBounds)
-    .nice(gridCount)
-    .range([chartHeight, 0]);
-  const points = data.map((d) => ({
-    x: xScale(d.x) + pd.left,
-    y: yScale(d.y) + pd.top,
-    original: d,
-  }));
+  // memo over callback since the output is function reference
+  const yScale = React.useMemo(() => {
+    const yBounds = extent(data, (d) => d.y) as [number, number];
+    return scaleLinear()
+      .domain(yBounds)
+      .nice(gridCount)
+      .range([chartHeight, 0]);
+  }, [data, gridCount, chartHeight]);
   const yTicks = yScale.ticks(gridCount);
-  const lineGenerator = d3Line<{ x: number; y: number }>()
-    .x((d) => d.x)
-    .y((d) => d.y)
-    .curve(curveCatmullRom);
-  const areaGenerator = d3Area<{ x: number; y: number }>()
-    .x((d) => d.x)
-    .y0(chartHeight + pd.top)
-    .y1((d) => d.y)
-    .curve(curveCatmullRom);
+
+  // normalize data
+  const points = React.useMemo(() => {
+    const xBounds = extent(data, (d) => d.x) as [number, number];
+    const xScale = scaleLinear().domain(xBounds).range([0, chartWidth]);
+    return data
+      .map((d) => ({
+        x: xScale(d.x) + pd.left,
+        y: yScale(d.y) + pd.top,
+        original: d,
+      }))
+      .sort((a, b) => a.x - b.x);
+  }, [chartWidth, data, pd.left, pd.top, yScale]);
 
   // create smooth line path
-  const lineSVGPath = lineGenerator(points);
-  const linePath = lineSVGPath && Skia.Path.MakeFromSVGString(lineSVGPath);
+  const linePath = React.useMemo(() => {
+    const lineSVGPath = lineGenerator()(points);
+    if (lineSVGPath) {
+      return Skia.Path.MakeFromSVGString(lineSVGPath);
+    }
+    return null;
+  }, [points]);
 
   // create area path under curve
-  const areaSVGPath = areaGenerator(points);
-  const areaPath =
-    areaSVGPath && gradient && Skia.Path.MakeFromSVGString(areaSVGPath);
+  const areaPath = React.useMemo(() => {
+    const areaSVGPath = areaGenerator(chartHeight + pd.top)(points);
+
+    if (areaSVGPath && gradient) {
+      return Skia.Path.MakeFromSVGString(areaSVGPath);
+    }
+    return null;
+  }, [chartHeight, pd.top, points, gradient]);
 
   //================================
   // Handlers
   //================================
+  function findSelectedPoint(x: number) {
+    const nearest = findNearestPoint(points, x);
+
+    if (nearest.original.x !== selectedPoint?.original.x) {
+      setSelectedPoint(nearest);
+    }
+  }
   function handleGestureEvent(e: PanGestureHandlerEventPayload) {
     "worklet";
-
-    // find the closest point by comparing touch X with all point.x
-    const nearest = points.reduce((prev, curr) =>
-      Math.abs(curr.x - e.x) < Math.abs(prev.x - e.x) ? curr : prev
-    );
-
-    runOnJS(setSelectedPoint)(nearest);
+    runOnJS(findSelectedPoint)(e.x);
   }
+
   const pan = Gesture.Pan().onBegin(handleGestureEvent);
 
   React.useEffect(() => {
@@ -238,23 +195,25 @@ export function LineChart({
   //================================
   // Subcomponents
   //================================
-  const gridLines = yTicks.map((tick, i) => {
-    const y = yScale(tick) + pd.top;
+  const gridLines = grid
+    ? yTicks.map((tick, i) => {
+        const y = yScale(tick) + pd.top;
 
-    return (
-      <GridLine
-        key={`grid-${i}`}
-        p1={{ x: pd.left, y }}
-        p2={{ x: width - pd.right, y }}
-        text={`${tick / 1000}k`}
-        x={fontSize / 3}
-        y={y + fontSize / 3}
-        font={font}
-        textColor={labelColor}
-        lineColor={gridColor}
-      />
-    );
-  });
+        return (
+          <GridLine
+            key={`grid-${i}`}
+            p1={{ x: pd.left, y }}
+            p2={{ x: width - pd.right, y }}
+            text={`${tick / 1000}k`}
+            x={fontSize / 3}
+            y={y + fontSize / 3}
+            font={font}
+            textColor={labelColor}
+            lineColor={gridColor}
+          />
+        );
+      })
+    : null;
 
   //================================
   // Render
@@ -270,9 +229,9 @@ export function LineChart({
         }}
         className="bg-white dark:bg-gray-700"
       >
-        {grid ? gridLines : null}
+        {gridLines}
         {linePath ? <LinePath path={linePath} color={accent} /> : null}
-        {areaPath && gradient ? (
+        {areaPath ? (
           <AreaPath
             path={areaPath}
             start={vec(pd.left, pd.top)}
