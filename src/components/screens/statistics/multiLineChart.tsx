@@ -184,6 +184,7 @@ export function MultiLineChart({
               font={font}
               backgroundColor={colorMap[selectedPoint.id] ?? "black"}
               textColor={"#fff"}
+              canvasWidth={width}
             />
           </>
         ) : null}

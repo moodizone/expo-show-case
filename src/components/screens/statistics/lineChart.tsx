@@ -253,6 +253,7 @@ export function LineChart({
               font={font}
               backgroundColor={accent}
               textColor={"#fff"}
+              canvasWidth={width}
             />
           </>
         ) : null}

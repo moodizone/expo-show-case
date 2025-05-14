@@ -9,9 +9,11 @@ type TooltipProps = {
   radius?: number;
   backgroundColor?: string;
   textColor?: string;
+  canvasWidth: number;
 };
 const paddingX = 12;
 const paddingY = 6;
+const spacingY = 10;
 
 export function Tooltip({
   x,
@@ -20,24 +22,26 @@ export function Tooltip({
   font,
   backgroundColor = "#3DD598",
   textColor = "#fff",
+  canvasWidth,
+  radius = 8,
 }: TooltipProps) {
   if (!font) return null;
 
-  const { height, width } = font.measureText(text);
-  const boxWidth = width + paddingX * 2;
-  const boxHeight = height + paddingY * 2;
+  const { height: textHeight, width: textWidth } = font.measureText(text);
+  const boxWidth = textWidth + paddingX * 2;
+  const boxHeight = textHeight + paddingY * 2;
 
-  // Convert values whether static or animated
-  const get = (val: number) => (typeof val === "number" ? val : val);
+  // determine vertical placement (flip up/down)
+  const placeAbove = y > boxHeight + spacingY;
+  const rectY = placeAbove ? y - boxHeight - spacingY : y + spacingY;
+  const textY = rectY + paddingY + textHeight - 1;
 
-  const cx = get(x);
-  const cy = get(y);
+  // determine horizontal alignment (shift left/right)
+  let rectX = x - boxWidth / 2;
+  if (rectX < 4) rectX = 4; // prevent overflow left
+  if (rectX + boxWidth > canvasWidth - 4) rectX = canvasWidth - boxWidth - 4;
 
-  const rectX = cx - boxWidth / 2;
-  // place above bullet
-  const rectY = cy - boxHeight - 10;
-  const textX = cx - width / 2;
-  const textY = rectY + paddingY + height - 1;
+  const textX = rectX + paddingX;
 
   return (
     <Group>
@@ -46,7 +50,7 @@ export function Tooltip({
         y={rectY}
         width={boxWidth}
         height={boxHeight}
-        r={8}
+        r={radius}
         color={backgroundColor}
       />
       <Text x={textX} y={textY} text={text} font={font} color={textColor} />
