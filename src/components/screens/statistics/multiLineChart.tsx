@@ -1,10 +1,10 @@
 import * as React from "react";
 import {
   Canvas,
+  SkFont,
   SkPath,
   SkPoint,
   Skia,
-  useFont,
 } from "@shopify/react-native-skia";
 import {
   Gesture,
@@ -23,7 +23,6 @@ import {
   LinePath,
 } from "@/components/screens/statistics/lineChart";
 import { Tooltip } from "@/components/screens/statistics/tooltip";
-import sf from "../../../../assets/fonts/SF-Pro-Display-Regular.otf";
 
 interface MChartPoint extends ChartPoint {
   id: string;
@@ -39,7 +38,7 @@ interface MultiLineChartProps {
     bottom?: number;
     left?: number;
   };
-  fontSize?: number;
+  font: SkFont;
   visibleLines?: Record<string, boolean>;
   colorMap?: Record<string, string>;
   onSelect?: (point: MChartPoint) => void;
@@ -63,7 +62,7 @@ export function MultiLineChart({
   height,
   padding,
   visibleLines,
-  fontSize = 12,
+  font,
   colorMap = {},
   onSelect,
 }: MultiLineChartProps) {
@@ -76,7 +75,6 @@ export function MultiLineChart({
     right: padding?.right ?? 20,
     bottom: padding?.bottom ?? 20,
   };
-  const font = useFont(sf, fontSize);
   const [selectedPoint, setSelectedPoint] = React.useState<MChartPoint | null>(
     null
   );
@@ -162,8 +160,6 @@ export function MultiLineChart({
   //================================
   // Render
   //================================
-  if (!font) return null;
-
   return (
     <GestureDetector gesture={pan}>
       <Canvas style={{ width, height }}>

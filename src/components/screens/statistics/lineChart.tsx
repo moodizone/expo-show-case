@@ -5,6 +5,7 @@ import {
   Group,
   Path,
   PathDef,
+  SkFont,
   SkPoint,
   Skia,
   useFont,
@@ -20,7 +21,6 @@ import {
 import { line as d3Line, curveCatmullRom } from "d3-shape";
 import { scaleLinear } from "d3-scale";
 
-import sf from "../../../../assets/fonts/SF-Pro-Display-Regular.otf";
 import { Tooltip } from "@/components/screens/statistics/tooltip";
 import { BulletPoint } from "@/components/screens/statistics/bullet";
 import { GridLine } from "@/components/screens/statistics/grid";
@@ -49,7 +49,7 @@ interface LineChartProps {
   };
   accent?: string;
   gradient?: string[];
-  fontSize?: number;
+  font: SkFont;
   labelColor?: string;
   onTap?(point: SkPoint): void;
 }
@@ -108,10 +108,11 @@ export function LineChart({
   onTap,
   accent = "#3DD598",
   gradient,
-  fontSize = 12,
+  font,
   labelColor = "#899A96",
   padding,
 }: LineChartProps) {
+  const fontSize = font.getSize();
   const pd = {
     top: padding?.top ?? 35,
     left: padding?.left ?? 20,
@@ -120,7 +121,6 @@ export function LineChart({
   };
   const chartWidth = width - pd.left - pd.right;
   const chartHeight = height - pd.top - pd.bottom;
-  const font = useFont(sf, fontSize);
   const [selectedPoint, setSelectedPoint] = React.useState<ChartPoint | null>(
     null
   );
@@ -204,7 +204,7 @@ export function LineChart({
             key={`grid-${i}`}
             p1={{ x: pd.left, y }}
             p2={{ x: width - pd.right, y }}
-            text={`${tick / 1000}k`}
+            text={`${tick}`}
             x={fontSize / 3}
             y={y + fontSize / 3}
             font={font}
