@@ -1,10 +1,10 @@
-import { ChartPoint } from "./lineChart";
+import { SkPoint } from "@shopify/react-native-skia";
 
 // points must be sorted based on 'x' (binary search)
-export function findNearestPoint(
-  sortedPoints: ChartPoint[],
+export function findNearestPoint<T extends SkPoint>(
+  sortedPoints: T[],
   x: number
-): ChartPoint {
+): T {
   let low = 0;
   let high = sortedPoints.length - 1;
 
