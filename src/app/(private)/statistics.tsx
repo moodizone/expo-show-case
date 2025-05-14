@@ -1,13 +1,14 @@
 import * as React from "react";
 import { View } from "react-native";
 import { useFont } from "@shopify/react-native-skia";
+import { useColorScheme } from "nativewind";
 
 import sf from "../../../assets/fonts/SF-Pro-Display-Regular.otf";
 import ScreenProvider from "@/components/hoc/ScreenProvider";
 import Card from "@/components/card";
-import { LineChart } from "@/components/screens/statistics/lineChart";
-import { useColorScheme } from "nativewind";
+import CircularProgressBar from "@/components/screens/statistics/circularProgress";
 import { MultiLineChart } from "@/components/screens/statistics/multiLineChart";
+import { LineChart } from "@/components/screens/statistics/lineChart";
 
 const data = [
   { x: 3, y: 45 },
@@ -30,12 +31,18 @@ const mData = {
     { x: 5, y: 70 },
   ],
 };
+const cpd = [
+  { percentage: 40, color: "#3DD598" },
+  { percentage: 50, color: "#FFC542" },
+  { percentage: 40, color: "#FF575F" },
+];
 
 function Statistics() {
+  const font = useFont(sf, 12);
   const { colorScheme } = useColorScheme();
   const gridColor = colorScheme === "dark" ? "#475E69" : "#E4E9F3";
   const labelColor = colorScheme === "dark" ? "#96A7AF" : "#899A96";
-  const font = useFont(sf, 12);
+  const strokeColor = colorScheme === "dark" ? "#2A3C44" : "#E4E9F3";
 
   if (!font) return null;
 
@@ -66,6 +73,14 @@ function Statistics() {
             height={180}
             width={320}
             padding={{ left: 0 }}
+          />
+        </Card>
+        <Card className="p-6" title="Statistics">
+          <CircularProgressBar
+            data={cpd}
+            strokeWidth={9}
+            size={120}
+            emptyColor={strokeColor}
           />
         </Card>
       </View>
