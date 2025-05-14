@@ -8,10 +8,14 @@ import {
   SkFont,
   SkPoint,
   Skia,
-  useFont,
   vec,
 } from "@shopify/react-native-skia";
-import { runOnJS, useSharedValue, withTiming } from "react-native-reanimated";
+import {
+  Easing,
+  runOnJS,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { extent } from "d3-array";
 import {
   Gesture,
@@ -73,7 +77,9 @@ export function LinePath({
   const animationLine = useSharedValue(0);
 
   React.useEffect(() => {
-    animationLine.set(withTiming(1, { duration: 1500 }));
+    animationLine.set(
+      withTiming(1, { duration: 1500, easing: Easing.inOut(Easing.ease) })
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

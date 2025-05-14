@@ -2,6 +2,7 @@ import { darkenHexColor } from "@/utils/color";
 import * as React from "react";
 import { ActivityIndicator, Pressable, PressableProps } from "react-native";
 import Animated, {
+  Easing,
   interpolateColor,
   useAnimatedStyle,
   useSharedValue,
@@ -71,16 +72,26 @@ export function Button({
       disabled={disabled || loading}
       onPressIn={(e) => {
         isActive.value = true;
-        transition.value = withTiming(1, { duration }, () => {
-          if (!isActive.value) {
-            transition.value = withTiming(0, { duration });
+        transition.value = withTiming(
+          1,
+          { duration, easing: Easing.inOut(Easing.ease) },
+          () => {
+            if (!isActive.value) {
+              transition.value = withTiming(0, {
+                duration,
+                easing: Easing.inOut(Easing.ease),
+              });
+            }
           }
-        });
+        );
         onPressIn?.(e);
       }}
       onPressOut={(e) => {
         if (transition.value === 1) {
-          transition.value = withTiming(0, { duration });
+          transition.value = withTiming(0, {
+            duration,
+            easing: Easing.inOut(Easing.ease),
+          });
         }
         isActive.value = false;
         onPressOut?.(e);
