@@ -4,7 +4,7 @@ import { Redirect } from "expo-router";
 import { ROUTES } from "@/routes";
 
 function Home() {
-  return <Redirect href={ROUTES.login} />;
+  return <Redirect href={ROUTES.statistics} />;
 }
 
 export default Home;
