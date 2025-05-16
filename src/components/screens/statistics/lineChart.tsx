@@ -233,7 +233,6 @@ export function LineChart({
           width,
           height,
         }}
-        className="bg-white dark:bg-gray-700"
       >
         {gridLines}
         {linePath ? <LinePath path={linePath} color={accent} /> : null}
