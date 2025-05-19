@@ -12,6 +12,7 @@ import { MultiLineChart } from "@/components/screens/statistics/multiLineChart";
 import { LineChart } from "@/components/screens/statistics/lineChart";
 import ProgressCard from "@/components/screens/statistics/progressCard";
 import ActivityTimeline from "@/components/screens/statistics/activityTimeline";
+import PyramidChart from "@/components/screens/statistics/pyramid";
 
 const data = [
   { x: 3, y: 45 },
@@ -83,6 +84,22 @@ const activities = [
     upper: 0.2,
   },
 ];
+const pyData = {
+  dark: [
+    { percentage: 7, color: "#3ED598", textColor: "white" },
+    { percentage: 13, color: "#39B786", textColor: "white" },
+    { percentage: 16, color: "#339A75", textColor: "white" },
+    { percentage: 22, color: "#2E7D64", textColor: "#3ED598" },
+    { percentage: 42, color: "#286053", textColor: "#3ED598" },
+  ],
+  light: [
+    { percentage: 7, color: "#3ED598", textColor: "white" },
+    { percentage: 13, color: "#64DEAC", textColor: "white" },
+    { percentage: 16, color: "#8BE6C1", textColor: "white" },
+    { percentage: 22, color: "#B1EFD5", textColor: "#3ED598" },
+    { percentage: 42, color: "#D8F7EA", textColor: "#3ED598" },
+  ],
+};
 
 function Statistics() {
   const font = useFont(sf, 12);
@@ -101,6 +118,13 @@ function Statistics() {
     <ScreenProvider>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="px-[30px]">
         <View className="flex-1 gap-y-5 pb-10">
+          <Card className="p-6" title="Statistics">
+            <PyramidChart
+              data={colorScheme === "dark" ? pyData.dark : pyData.light}
+              width={availableWidth}
+              height={360}
+            />
+          </Card>
           <Card className="p-6" title="Statistics">
             <LineChart
               data={data}
