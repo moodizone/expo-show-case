@@ -11,6 +11,7 @@ import CircularProgressBar from "@/components/screens/statistics/circularProgres
 import { MultiLineChart } from "@/components/screens/statistics/multiLineChart";
 import { LineChart } from "@/components/screens/statistics/lineChart";
 import ProgressCard from "@/components/screens/statistics/progressCard";
+import ActivityTimeline from "@/components/screens/statistics/activityTimeline";
 
 const data = [
   { x: 3, y: 45 },
@@ -38,6 +39,50 @@ const cpd = [
   { percentage: 50, color: "#FFC542" },
   { percentage: 40, color: "#FF575F" },
 ];
+const activities = [
+  {
+    day: "17",
+    weekday: "MON",
+    bottom: 0.5,
+    upper: 0.2,
+  },
+  {
+    day: "18",
+    weekday: "TUE",
+    bottom: 0.25,
+    upper: 0.22,
+  },
+  {
+    day: "19",
+    weekday: "WED",
+    bottom: 0.3,
+    upper: 0.2,
+  },
+  {
+    day: "20",
+    weekday: "THU",
+    bottom: 0.7,
+    upper: 0.2,
+  },
+  {
+    day: "21",
+    weekday: "FRI",
+    bottom: 0.5,
+    upper: 0.2,
+  },
+  {
+    day: "22",
+    weekday: "SAT",
+    bottom: 0.2,
+    upper: 0.2,
+  },
+  {
+    day: "23",
+    weekday: "SUN",
+    bottom: 0.5,
+    upper: 0.2,
+  },
+];
 
 function Statistics() {
   const font = useFont(sf, 12);
@@ -47,6 +92,7 @@ function Statistics() {
   const gridColor = colorScheme === "dark" ? "#475E69" : "#E4E9F3";
   const labelColor = colorScheme === "dark" ? "#96A7AF" : "#899A96";
   const strokeColor = colorScheme === "dark" ? "#2A3C44" : "#E4E9F3";
+  const dayColor = colorScheme === "dark" ? "white" : "#1A3B34";
   const availableWidth = width - 30 * 2 - 24 * 2;
 
   if (!font) return null;
@@ -140,6 +186,16 @@ function Statistics() {
               percentage={70}
               height={70}
               color={"#FFC542"}
+            />
+          </Card>
+          <Card className="p-6" title="Statistics">
+            <ActivityTimeline
+              data={activities}
+              width={availableWidth}
+              height={200}
+              backColor={strokeColor}
+              dayColor={dayColor}
+              weekdayColor={labelColor}
             />
           </Card>
         </View>
