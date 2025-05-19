@@ -13,7 +13,6 @@ export const ROUTES = {
     },
   },
   onboarding: "/onboarding",
-  posts: "/posts",
   statistics: "/statistics",
 } as const;
 

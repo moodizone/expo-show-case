@@ -4,7 +4,7 @@ import { useFont } from "@shopify/react-native-skia";
 import { useColorScheme } from "nativewind";
 import { FontAwesome6 } from "@expo/vector-icons";
 
-import sf from "../../../assets/fonts/SF-Pro-Display-Regular.otf";
+import sf from "../../assets/fonts/SF-Pro-Display-Regular.otf";
 import ScreenProvider from "@/components/hoc/ScreenProvider";
 import Card from "@/components/card";
 import CircularProgressBar from "@/components/screens/statistics/circularProgress";
