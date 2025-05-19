@@ -48,7 +48,7 @@ function Onboarding() {
         <View className="px-8 mt-8">
           <Footer
             backHandler={() => router.dismiss()}
-            nextHandler={() => router.push(ROUTES.posts)}
+            nextHandler={() => router.push('404')}
           />
         </View>
       </View>

@@ -7,7 +7,8 @@ import Animated, {
 } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image } from "expo-image";
-import { data } from "./data";
+import { data } from "@/components/screens/onboarding/data";
+
 
 interface Props {
   index: number;
