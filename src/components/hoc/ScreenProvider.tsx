@@ -1,4 +1,4 @@
-import { usePathname } from "expo-router";
+import { useLocalSearchParams, usePathname } from "expo-router";
 import { useColorScheme } from "nativewind";
 import * as React from "react";
 import { Button, SafeAreaView, StatusBar, Text, View } from "react-native";
@@ -14,6 +14,10 @@ function ScreenProvider({
   hide = false,
 }: React.PropsWithChildren<Props>) {
   const pathname = usePathname();
+  const params = useLocalSearchParams();
+  const queryString = Object.entries(params)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value as string)}`)
+    .join("&");
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const fallbackBg = colorScheme === "light" ? "#ffffff" : "#22343C";
   return (
@@ -23,8 +27,8 @@ function ScreenProvider({
         backgroundColor={bg ?? fallbackBg}
       />
       {hide ? null : (
-        <View className="p-3 justify-between flex-row gap-3">
-          <Text className="p-3 text-gray-950 dark:text-gray-50">{`Pathname: ${pathname}`}</Text>
+        <View className="py-3 px-[30px] justify-between flex-row gap-3">
+          <Text className="text-gray-950 dark:text-gray-50">{`${pathname}?${queryString}`}</Text>
           <Button
             onPress={toggleColorScheme}
             title={colorScheme ?? "toggle"}
