@@ -14,6 +14,7 @@ export const ROUTES = {
   },
   onboarding: "/onboarding",
   statistics: "/statistics",
+  contacts: "/contacts",
 } as const;
 
 export const publicRoutes = [
