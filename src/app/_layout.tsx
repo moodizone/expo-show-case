@@ -19,7 +19,7 @@ SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { throwOnError: true, retry: false },
+    queries: { throwOnError: false, retry: false },
   },
 });
 
