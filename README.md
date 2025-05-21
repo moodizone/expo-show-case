@@ -1,73 +1,110 @@
-# App Directory Structure
+# 📱 Kafoor — React Native Showcase App
 
-This app uses a route-based authentication system with the following structure:
+A feature-rich showcase app built with **React Native**, **Expo Router**, and **TypeScript**.  
+This project demonstrates my skills across a wide spectrum of mobile development — from animations and permissions to maps, audio, and real-world device integration.
 
-## Route Groups
+---
 
-- `(public)` - Routes accessible without authentication
-  - `onboarding` - Single page for first-time users
-  - `sign-in` - Login page
-  - `sign-up` - Multi-step registration process
-    - Step 1: Email and password
-    - Step 2: Phone number
-    - Step 3: Password confirmation
-    - Step 4: Email verification
+## ✨ UI Kit Inspiration
 
-- `(private)` - Routes requiring authentication
-  - Tab-based navigation for main app features:
-    - `posts` - User posts
-    - `store` - Store section
-    - `feed` - News feed
-    - `settings` - User settings
-    - `statistics` - User statistics
+The design is based on the beautiful [Marvie✨ iOS UI Kit - Dark Theme](https://www.figma.com/community/file/827876058453173134) from Figma Community:
 
-## Authentication
+> _"Marvie✨ is your top-notch multipurpose UI kit with bright and friendly colors. Full-featured and handy. Trendy and eye-catching. Created with care of designers and users."_
 
-Authentication is handled through the `services/auth.ts` file which provides:
-- Login
-- Registration
-- Email availability check
-- 2FA for registration
-- Token management
+---
 
-## Services
+## ✨ Features
 
-The `services` directory contains modular service files for different features:
-- `auth.ts` - Authentication related services
-- Future services will be added for:
-  - User management
-  - Posts
-  - Products
-  - etc.
+- 📞 Contact access with filtering & sorting
+- 🎨 Dynamic theming (dark/light mode)
+- 🧭 Navigation via Expo Router
+- 🚀 Optimized list rendering with FlatList
+- ✅ Form handling with React Hook Form + Zod/Yup
+- 📊 Custom charts using Skia
+- 🔍 Debounced search input
+- 🎯 Error boundaries and graceful fallbacks
+- 🔌 Modular architecture for scalability
 
-## Validations
+---
 
-The `validations` directory contains all form validation logic:
-- `auth.ts` - Authentication form validations
-- `user.ts` - User profile validations
-- etc.
+## 📚 Tech Stack
 
-## Styling
+- React Native + Expo
+- Expo Router
+- React Query
+- React Hook Form
+- Zod / Yup
+- TailwindCSS (via NativeWind)
+- React Native Skia
+- D3 for data processing
+- TypeScript
+- Jest & Testing Library
 
-This project uses NativeWind for styling:
-- All styles are written using Tailwind CSS classes
-- Custom styles can be added in `tailwind.config.js`
-- Components use className prop for styling
+---
 
-## Setup
+## 🔧 Setup
 
-1. Install dependencies:
 ```bash
-npm install
+git clone https://github.com/your-username/kafoor.git
+cd kafoor
+yarn install
+yarn start
 ```
 
-2. Start the development server:
+> Make sure you have Expo CLI installed: `npm install -g expo-cli`
+
+---
+
+## 📦 Packages Used
+
+This project uses the following key dependencies:
+
+- `expo-router`
+- `@tanstack/react-query`
+- `react-hook-form`
+- `zod`
+- `nativewind` (Tailwind in RN)
+- `@shopify/react-native-skia`
+- `expo-contacts`, `expo-splash-screen`, `expo-image`, etc.
+
+---
+
+## 🧪 Testing
+
 ```bash
-npm start
+yarn test
 ```
 
-3. Run on your device:
-```bash
-npm run android # for Android
-npm run ios # for iOS
-``` 
+---
+
+## 📁 Project Scripts
+
+| Script          | Description                           |
+| --------------- | ------------------------------------- |
+| `start`         | Start Expo development server         |
+| `android`       | Run on Android emulator/device        |
+| `ios`           | Run on iOS simulator                  |
+| `web`           | Run web version                       |
+| `test`          | Run all Jest tests                    |
+| `lint`          | Run ESLint on the project files       |
+| `reset-project` | Clean cache & rebuild (custom script) |
+
+---
+
+## 🛠️ Status
+
+This project is **in progress**, with active feature development, design refinement, and performance optimization underway.
+
+> Feel free to fork or explore the code if you're interested in scalable React Native app architecture!
+
+---
+
+## 🧑‍💻 Author
+
+Made with 💙 by **Moodi**
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.

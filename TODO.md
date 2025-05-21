@@ -42,16 +42,16 @@
 ## ⚙️ Performance & UX
 
 - [ ] App startup optimization (preloading fonts/assets, lazy imports)  
-- [ ] Smooth animations (`react-native-reanimated`)  
+- ✅ Smooth animations (`react-native-reanimated`)  
 - [ ] Skeleton loading states (instead of spinners)  
 - [ ] Pagination / Infinite scroll for large lists  
-- [ ] Debounced input fields (search/filter)
+- ✅ Debounced input fields (search/filter)
 
 ---
 
 ## 📱 Device Integration
 
-- [ ] Dynamic theming (light/dark mode with context or `useColorScheme`)  
+- ✅ Dynamic theming (light/dark mode with context or `useColorScheme`)  
 - [ ] In-app update prompts  
 - [ ] Deep linking & universal links
 
