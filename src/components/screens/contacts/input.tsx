@@ -5,12 +5,14 @@ import { FontAwesome6 } from "@expo/vector-icons";
 import { useDebounce } from "use-debounce";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
+import { ParamsType } from "@/app/contacts";
+
 function ContactInput() {
   //================================
   // Init
   //================================
   const router = useRouter();
-  const { query } = useLocalSearchParams<{ query?: string }>();
+  const { query }: ParamsType = useLocalSearchParams();
   const [term, setTerm] = React.useState(query ?? "");
   const [value] = useDebounce(term, 750);
   const { colorScheme } = useColorScheme();
@@ -37,7 +39,7 @@ function ContactInput() {
       <TextInput
         value={term}
         onChangeText={setTerm}
-        className={`h-[50px] font-regular text-[14px] text-gray-300 dark:text-gray-200`}
+        className={`h-[50px] font-regular text-[14px] text-gray-300 dark:text-gray-200 flex-grow`}
         placeholderTextColor={googleColor}
         placeholder="Search"
         autoCapitalize={"none"}

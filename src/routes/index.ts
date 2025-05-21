@@ -14,7 +14,12 @@ export const ROUTES = {
   },
   onboarding: "/onboarding",
   statistics: "/statistics",
-  contacts: "/contacts",
+  contacts: {
+    root: "/contacts",
+    modal: {
+      sort: "/contacts/modal/sort",
+    },
+  },
 } as const;
 
 export const publicRoutes = [
