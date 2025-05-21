@@ -47,8 +47,8 @@ function Onboarding() {
         <Pagination scrollX={scrollX} />
         <View className="px-8 mt-8">
           <Footer
-            backHandler={() => router.dismiss()}
-            nextHandler={() => router.push('404')}
+            backHandler={() => router.dismissTo(ROUTES.home)}
+            nextHandler={() => router.dismissTo(ROUTES.home)}
           />
         </View>
       </View>

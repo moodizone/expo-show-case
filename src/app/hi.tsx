@@ -1,8 +1,6 @@
 import * as React from "react";
 import { Text, View } from "react-native";
-import { Link } from "expo-router";
 
-import { ROUTES } from "@/routes";
 import ErrorContainer from "@/components/error";
 import ScreenProvider from "@/components/hoc/ScreenProvider";
 
@@ -22,12 +20,6 @@ function Hi() {
               "Marvie is your top-notch multipurpose UI kit with bright and friendly colors. Full-featured and handy. Trendy and eye-catching. Created with care of designers and users."
             }
           </Text>
-          <Link
-            href={ROUTES.onboarding}
-            className="text-[14px] leading-[24px] font-medium text-white mt-4"
-          >
-            {"Go to onboarding"}
-          </Link>
         </View>
       </ErrorContainer>
     </ScreenProvider>

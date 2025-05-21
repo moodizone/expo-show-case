@@ -28,12 +28,12 @@ function FaceID() {
             backHandler={() => {
               router.dismiss();
             }}
-            nextHandler={() => router.push(ROUTES.hi)}
+            nextHandler={() => router.push(ROUTES.home)}
           />
         </View>
         <View className="mt-4">
           <Link
-            href={ROUTES.hi}
+            href={ROUTES.home}
             className="text-[14px] leading-[24px] text-center font-medium text-[#A3A3A4]"
           >
             {"Skip Face ID"}

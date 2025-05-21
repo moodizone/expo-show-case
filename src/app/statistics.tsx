@@ -116,7 +116,7 @@ function Statistics() {
 
   return (
     <ScreenProvider>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="px-[30px]">
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="px-[30px] mt-6">
         <View className="flex-1 gap-y-5 pb-10">
           <Card className="p-6" title="Statistics">
             <PyramidChart

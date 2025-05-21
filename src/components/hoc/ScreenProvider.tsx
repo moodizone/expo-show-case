@@ -1,7 +1,9 @@
-import { useLocalSearchParams, usePathname } from "expo-router";
-import { useColorScheme } from "nativewind";
 import * as React from "react";
+import { useLocalSearchParams, usePathname, useRouter } from "expo-router";
+import { useColorScheme } from "nativewind";
 import { Button, SafeAreaView, StatusBar, Text, View } from "react-native";
+
+import { ROUTES } from "@/routes";
 
 interface Props {
   hide?: boolean;
@@ -13,6 +15,7 @@ function ScreenProvider({
   bg,
   hide = false,
 }: React.PropsWithChildren<Props>) {
+  const router = useRouter();
   const pathname = usePathname();
   const params = useLocalSearchParams();
   const queryString = Object.entries(params)
@@ -27,13 +30,22 @@ function ScreenProvider({
         backgroundColor={bg ?? fallbackBg}
       />
       {hide ? null : (
-        <View className="py-3 px-[30px] justify-between flex-row gap-3">
-          <Text className="text-gray-950 dark:text-gray-50">{`${pathname}?${queryString}`}</Text>
-          <Button
-            onPress={toggleColorScheme}
-            title={colorScheme ?? "toggle"}
-            accessibilityLabel="Learn more about this purple button"
-          />
+        <View className="py-3 px-[30px] items-center justify-start flex-row gap-3 border-b-[1px] border-gray-300 dark:border-gray-200">
+          <Text className="flex-grow text-gray-950 dark:text-gray-50">{`${pathname}${
+            queryString ? "?" + queryString : ""
+          }`}</Text>
+          <View className="flex-grow-0 gap-x-1 flex-row flex-nowrap">
+            <Button
+              onPress={toggleColorScheme}
+              title={"Theme"}
+              accessibilityLabel="Learn more about this purple button"
+            />
+            <Button
+              onPress={() => router.dismissTo(ROUTES.home)}
+              title={"Home"}
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
         </View>
       )}
       {children}
