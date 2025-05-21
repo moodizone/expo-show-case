@@ -26,3 +26,16 @@ export function darkenHexColor(hex: string, percent: number): string {
 
   return `#${[r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("")}`;
 }
+
+export function getAvatarColor(name: string): string {
+  const avatarColors = ["#FF974A", "#3ED598", "#FFC542", "#FF565E"];
+
+  let hash = 0;
+
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  const index = Math.abs(hash) % avatarColors.length;
+  return avatarColors[index];
+}
