@@ -60,7 +60,7 @@ export default function OTPInput({ onCodeFilled }: Props) {
     <View className="flex-row gap-x-1 justify-between">
       {values.map((digit, index) => (
         <View
-          className="flex items-center w-[60px] border-b-[2px] border-[#0000000D] dark:border-gray-400"
+          className="flex items-center  border-b-[2px] border-[#0000000D] dark:border-gray-400"
           key={index}
         >
           <TextInput
@@ -73,7 +73,7 @@ export default function OTPInput({ onCodeFilled }: Props) {
             keyboardType="number-pad"
             maxLength={1}
             returnKeyType="next"
-            className="text-[24px] font-bold leading-[24px] text-meadow-1000 dark:text-white"
+            className="text-[24px] font-bold leading-[24px] text-meadow-1000 dark:text-white w-[60px] text-center"
           />
         </View>
       ))}

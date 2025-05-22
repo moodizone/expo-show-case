@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { Text, View } from "react-native";
+import { KeyboardAvoidingView, Platform, Text, View } from "react-native";
 import { FontAwesome6 } from "@expo/vector-icons";
 
 import ModalOverlay from "@/components/screens/auth/modalOverlay";
@@ -18,9 +18,13 @@ export default function Modal() {
       }}
     >
       <View className="bg-white dark:bg-gray-700 rounded-tl-[24px] rounded-tr-[24px] px-8 py-6 w-full">
-        <OTPInput
-          onCodeFilled={(code) => console.log("2FA code entered:", code)}
-        />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "position"}
+        >
+          <OTPInput
+            onCodeFilled={(code) => console.log("2FA code entered:", code)}
+          />
+        </KeyboardAvoidingView>
         <Text className="mt-4 text-[16px] font-regular leading-[22px] text-gray-300 dark:text-gray-200">
           {"Please, enter 4-digit code we sent on your number as SMS"}
         </Text>

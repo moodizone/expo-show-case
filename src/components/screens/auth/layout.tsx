@@ -35,11 +35,7 @@ function AuthLayout({
             {description}
           </Text>
         ) : null}
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : undefined}
-        >
-          {children}
-        </KeyboardAvoidingView>
+        {children}
       </View>
     </ScreenProvider>
   );
