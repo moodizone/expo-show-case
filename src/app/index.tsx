@@ -51,7 +51,7 @@ function Home() {
   const iconColor = colorScheme === "dark" ? "#899A96" : "#96A7AF";
   return (
     <ScreenProvider>
-      <View className="p-3 flex-wrap flex-row gap-2">
+      <View className="px-[30px] mt-6 flex-wrap flex-row gap-2">
         {routes.map((r) => (
           <Link
             href={r.url as Href}

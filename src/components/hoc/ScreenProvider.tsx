@@ -31,10 +31,10 @@ function ScreenProvider({
       />
       {hide ? null : (
         <View className="py-3 px-[30px] items-center justify-start flex-row gap-3 border-b-[1px] border-gray-300 dark:border-gray-200">
-          <Text className="flex-grow text-gray-950 dark:text-gray-50">{`${pathname}${
+          <Text className="flex-grow flex-shrink text-gray-950 dark:text-gray-50">{`${pathname}${
             queryString ? "?" + queryString : ""
           }`}</Text>
-          <View className="flex-grow-0 gap-x-1 flex-row flex-nowrap">
+          <View className="flex-grow-0 flex-shrink-0 gap-x-1 flex-row flex-nowrap">
             <Button
               onPress={toggleColorScheme}
               title={"Theme"}
