@@ -1,8 +1,13 @@
 import * as React from "react";
 import Svg, { Circle, Rect } from "react-native-svg";
-import { LayoutChangeEvent, View } from "react-native";
+import { LayoutChangeEvent, Text, View } from "react-native";
 
-function ErrorContainer({ children }: React.PropsWithChildren) {
+interface Props {
+  error: Error;
+  className?: string;
+}
+
+export function ErrorContainer({ children }: React.PropsWithChildren) {
   const [size, setSize] = React.useState({ width: 0, height: 0 });
 
   const onLayout = (e: LayoutChangeEvent) => {
@@ -67,4 +72,15 @@ function ErrorContainer({ children }: React.PropsWithChildren) {
   );
 }
 
-export default ErrorContainer;
+export function ErrorAlert({ error, className }: Props) {
+  return (
+    <View className={className}>
+      <Text className="text-meadow-1000 dark:text-white text-[20px] font-bold leading-[30px] font-regular mb-2">
+        {error.name}
+      </Text>
+      <Text className="text-meadow-1000 dark:text-white text-[14px] leading-[20px] font-regular">
+        {error.message}
+      </Text>
+    </View>
+  );
+}

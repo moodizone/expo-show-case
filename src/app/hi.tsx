@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Text, View } from "react-native";
 
-import ErrorContainer from "@/components/error";
+import {ErrorContainer} from "@/components/error";
 import ScreenProvider from "@/components/hoc/ScreenProvider";
 
 function Hi() {

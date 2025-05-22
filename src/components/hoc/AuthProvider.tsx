@@ -2,7 +2,7 @@ import * as React from "react";
 import { useQuery } from "@tanstack/react-query";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import Loading from "@/components/loading";
+import { Loading } from "@/components/loading";
 import { checkAuthStatus } from "@/services/auth";
 
 function AuthProvider({ children }: React.PropsWithChildren) {

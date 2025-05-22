@@ -2,7 +2,7 @@ import * as React from "react";
 import { Text, View } from "react-native";
 import { Link } from "expo-router";
 
-import ErrorContainer from "@/components/error";
+import { ErrorContainer } from "@/components/error";
 import { ROUTES } from "@/routes";
 import ScreenProvider from "@/components/hoc/ScreenProvider";
 

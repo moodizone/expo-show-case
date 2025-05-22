@@ -1,18 +1,15 @@
 import * as React from "react";
 import * as Cts from "expo-contacts";
-import {
-  Text,
-  FlatList,
-  View,
-  ActivityIndicator,
-  useWindowDimensions,
-} from "react-native";
+import { Text, FlatList, View, useWindowDimensions } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 
 import { ParamsType } from "@/app/contacts";
 import { Item } from "@/components/screens/contacts/item";
 import { SortEnum } from "@/app/contacts/modal/sort";
 import { useAsync } from "@/utils/async";
+import { throwPermissionError } from "@/utils/error";
+import { ErrorAlert } from "@/components/error";
+import { LoadingAlert } from "@/components/loading";
 
 async function getContacts() {
   const permission = await Cts.getPermissionsAsync();
@@ -28,7 +25,9 @@ async function getContacts() {
     }
   }
 
-  throw new Error("Can not load contacts");
+  throwPermissionError(
+    "Contacts permissions are not granted. Please enable them in your device settings."
+  );
 }
 
 function List() {
@@ -70,24 +69,8 @@ function List() {
   //================================
   // Render
   //================================
-  if (loading)
-    return (
-      <View className="px-[30px] items-center mt-6">
-        <ActivityIndicator color={"#3DD598"} size={24} />
-      </View>
-    );
-
-  if (error)
-    return (
-      <View className="px-[30px] mt-6">
-        <Text className="text-meadow-1000 dark:text-white text-[20px] font-bold leading-[30px] font-regular mb-2">
-          {error.name}
-        </Text>
-        <Text className="text-meadow-1000 dark:text-white text-[14px] leading-[20px] font-regular">
-          {error.message}
-        </Text>
-      </View>
-    );
+  if (loading) return <LoadingAlert className="px-[30px] mt-6" />;
+  if (error) return <ErrorAlert className="px-[30px] mt-6" error={error} />;
 
   return (
     <View className="px-[30px] mt-6" style={{ height: height - 200 }}>
