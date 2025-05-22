@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useLocalSearchParams, usePathname, useRouter } from "expo-router";
 import { useColorScheme } from "nativewind";
-import { Button, SafeAreaView, StatusBar, Text, View } from "react-native";
+import { Button, StatusBar, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ROUTES } from "@/routes";
 
@@ -23,8 +24,12 @@ function ScreenProvider({
     .join("&");
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const fallbackBg = colorScheme === "light" ? "#ffffff" : "#22343C";
+
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-[#22343C]">
+    <SafeAreaView
+      className="flex-1 bg-white dark:bg-[#22343C]"
+      edges={["top", "bottom"]}
+    >
       <StatusBar
         barStyle={colorScheme === "light" ? "dark-content" : "light-content"}
         backgroundColor={bg ?? fallbackBg}
