@@ -15,11 +15,17 @@ import { SortEnum } from "@/app/contacts/modal/sort";
 import { useAsync } from "@/utils/async";
 
 async function getContacts() {
-  const { status } = await Cts.requestPermissionsAsync();
+  const permission = await Cts.getPermissionsAsync();
 
-  if (status === Cts.PermissionStatus.GRANTED) {
+  if (permission.granted) {
     const { data } = await Cts.getContactsAsync();
     return data;
+  } else if (!permission.granted && permission.canAskAgain) {
+    const { status } = await Cts.requestPermissionsAsync();
+    if (status === Cts.PermissionStatus.GRANTED) {
+      const { data } = await Cts.getContactsAsync();
+      return data;
+    }
   }
 
   throw new Error("Can not load contacts");
