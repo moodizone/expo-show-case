@@ -20,6 +20,7 @@ export const ROUTES = {
       sort: "/contacts/modal/sort",
     },
   },
+  audioRecording: "/audio-recording",
 } as const;
 
 export const publicRoutes = [
