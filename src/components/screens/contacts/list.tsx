@@ -8,11 +8,11 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { useQuery } from "@tanstack/react-query";
 
 import { ParamsType } from "@/app/contacts";
 import { Item } from "@/components/screens/contacts/item";
 import { SortEnum } from "@/app/contacts/modal/sort";
+import { useAsync } from "@/utils/async";
 
 async function getContacts() {
   const { status } = await Cts.requestPermissionsAsync();
@@ -30,44 +30,41 @@ function List() {
   const { query, sort }: ParamsType = useLocalSearchParams();
 
   const {
-    data: contacts = [],
-    isLoading,
+    value: contacts = [],
+    loading,
     error,
-  } = useQuery({
-    queryKey: ["contacts", query, sort],
-    queryFn: async () => {
-      const contacts = await getContacts();
-      let filtered = contacts;
+  } = useAsync(async () => {
+    const contacts = await getContacts();
+    let filtered = contacts;
 
-      if (query) {
-        filtered = filtered.filter((c) =>
-          c.name?.toLowerCase().includes(query.toLowerCase())
-        );
-      }
+    if (query) {
+      filtered = filtered.filter((c) =>
+        c.name?.toLowerCase().includes(query.toLowerCase())
+      );
+    }
 
-      if (sort === SortEnum.firstName) {
-        filtered = filtered.sort((a, b) =>
-          (a.firstName || "").localeCompare(b.firstName || "")
-        );
-      }
+    if (sort === SortEnum.firstName) {
+      filtered = filtered.sort((a, b) =>
+        (a.firstName || "").localeCompare(b.firstName || "")
+      );
+    }
 
-      if (sort === SortEnum.lastName) {
-        filtered = filtered.sort((a, b) =>
-          (b.lastName || "").localeCompare(a.lastName || "")
-        );
-      }
-      if (sort === SortEnum.none) {
-        filtered = contacts;
-      }
+    if (sort === SortEnum.lastName) {
+      filtered = filtered.sort((a, b) =>
+        (b.lastName || "").localeCompare(a.lastName || "")
+      );
+    }
+    if (sort === SortEnum.none) {
+      filtered = contacts;
+    }
 
-      return filtered;
-    },
-  });
+    return filtered;
+  }, [query, sort]);
 
   //================================
   // Render
   //================================
-  if (isLoading)
+  if (loading)
     return (
       <View className="px-[30px] items-center mt-6">
         <ActivityIndicator color={"#3DD598"} size={24} />
