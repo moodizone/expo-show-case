@@ -121,13 +121,11 @@ export function Button({
 interface IconButtonProps extends BasicButtonProps {
   icon: React.ReactNode;
   rounded?: boolean;
-  size?: number;
 }
 
 export function IconButton({
   icon,
   rounded = false,
-  size = 60,
   ...others
 }: IconButtonProps) {
   const radiusStyles = rounded ? "rounded-[50%]" : undefined;
@@ -137,8 +135,7 @@ export function IconButton({
       {...others}
       className={radiusStyles}
       style={{
-        width: size,
-        height: size,
+        width: 60,
       }}
     >
       {icon}

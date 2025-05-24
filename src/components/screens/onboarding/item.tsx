@@ -7,6 +7,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image } from "expo-image";
+
 import { data } from "@/components/screens/onboarding/data";
 
 
