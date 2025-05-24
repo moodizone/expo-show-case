@@ -79,7 +79,7 @@ function Login() {
         </View>
         <View className="mt-16">
           <Button
-            // onPress={nextHandler}
+            bgColor="#3DD598"
             shadow={{ color: "#0FDA89", opacity: 0.3 }}
             className="flex-row gap-x-3 items-center justify-center"
           >

@@ -26,6 +26,7 @@ function Footer({ backHandler, nextHandler }: Props) {
       </View>
       <View className="flex-grow">
         <Button
+          bgColor="#3DD598"
           onPress={nextHandler}
           shadow={{ color: "#0FDA89", opacity: 0.3 }}
           className="flex-row gap-x-3 items-center justify-center"

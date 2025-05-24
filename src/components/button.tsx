@@ -1,6 +1,11 @@
 import { darkenHexColor } from "@/utils/color";
 import * as React from "react";
-import { ActivityIndicator, Pressable, PressableProps } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  PressableProps,
+  ViewStyle,
+} from "react-native";
 import Animated, {
   Easing,
   interpolateColor,
@@ -13,9 +18,11 @@ import { twMerge } from "tailwind-merge";
 const duration = 200;
 
 interface BasicButtonProps extends PressableProps {
-  variant?: "solid" | "text";
+  variant?: "solid" | "text" | "outlined";
   loading?: boolean;
   bgColor?: string;
+  focusBgColor?: string;
+  // indicator color
   accent?: string;
   width?: number;
   shadow?: {
@@ -26,7 +33,8 @@ interface BasicButtonProps extends PressableProps {
 
 export function Button({
   variant = "solid",
-  bgColor = "#3DD598", // meadow-300
+  bgColor,
+  focusBgColor,
   accent = "#fff",
   shadow,
   disabled,
@@ -38,10 +46,17 @@ export function Button({
   children,
   ...others
 }: BasicButtonProps) {
-  const normalBg = variant === "solid" ? bgColor : "#00000000"; // transparent
-  const pressedBg =
-    variant === "solid" ? darkenHexColor(bgColor, 0.1) : "#BEC7C5";
+  const regularBg = bgColor ?? "black";
+  const focusedBg = focusBgColor
+    ? focusBgColor
+    : bgColor
+    ? darkenHexColor(bgColor, 0.1)
+    : "#BEC7C5";
   const isDisabled = disabled ? "opacity-60" : "opacity-100";
+  const borderStyles: ViewStyle = {
+    borderColor: accent,
+    borderWidth: 2,
+  };
   const shadowStyle = shadow
     ? {
         shadowColor: shadow.color,
@@ -56,19 +71,32 @@ export function Button({
     : undefined;
   const transition = useSharedValue(0);
   const isActive = useSharedValue(false);
-  const animatedStyle = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(
-      transition.value,
-      [0, 1],
-      [normalBg, pressedBg]
-    ),
-  }));
+  const animatedBgStyle = useAnimatedStyle(() => {
+    if (variant === "solid") {
+      return {
+        backgroundColor: interpolateColor(
+          transition.value,
+          [0, 1],
+          [regularBg, focusedBg]
+        ),
+      };
+    } else if (variant === "outlined" || variant === "text") {
+      return {
+        backgroundColor: interpolateColor(
+          transition.value,
+          [0, 1],
+          ["transparent", focusedBg]
+        ),
+      };
+    }
+    return {};
+  });
 
   return (
     <Pressable
       {...others}
       style={style}
-      className="w-full"
+      className="h-[60px] w-full"
       disabled={disabled || loading}
       onPressIn={(e) => {
         isActive.value = true;
@@ -101,9 +129,9 @@ export function Button({
       accessibilityLabel="Press me"
     >
       <Animated.View
-        style={[shadowStyle, animatedStyle]}
+        style={[shadowStyle, animatedBgStyle, borderStyles]}
         className={twMerge(
-          `justify-center items-center rounded-[12px] h-[60px] w-full`,
+          `justify-center items-center rounded-[12px] h-full w-full`,
           isDisabled,
           className
         )}
@@ -121,11 +149,13 @@ export function Button({
 interface IconButtonProps extends BasicButtonProps {
   icon: React.ReactNode;
   rounded?: boolean;
+  size?: number;
 }
 
 export function IconButton({
   icon,
   rounded = false,
+  size = 60,
   ...others
 }: IconButtonProps) {
   const radiusStyles = rounded ? "rounded-[50%]" : undefined;
@@ -135,7 +165,8 @@ export function IconButton({
       {...others}
       className={radiusStyles}
       style={{
-        width: 60,
+        width: size,
+        height: size,
       }}
     >
       {icon}
