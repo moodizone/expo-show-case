@@ -10,11 +10,13 @@ import { Image } from "expo-image";
 
 import { data } from "@/components/screens/onboarding/data";
 
-
 interface Props {
   index: number;
   scrollX: SharedValue<number>;
 }
+
+const placeholder =
+  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 const { width } = Dimensions.get("window");
 
@@ -65,6 +67,7 @@ export function SliderItem({ index, scrollX }: Props) {
             source={data[index].url}
             contentFit="cover"
             transition={300}
+            placeholder={placeholder}
           />
           <LinearGradient
             colors={["#1A3B3400", "#0B0B0B40"]}
