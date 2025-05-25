@@ -28,6 +28,7 @@ function ScreenProvider({
   return (
     <SafeAreaView
       className="flex-1 bg-white dark:bg-[#22343C]"
+      style={{ backgroundColor: bg ?? fallbackBg }}
       edges={["top", "bottom"]}
     >
       <StatusBar

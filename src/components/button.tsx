@@ -1,11 +1,6 @@
 import { darkenHexColor } from "@/utils/color";
 import * as React from "react";
-import {
-  ActivityIndicator,
-  Pressable,
-  PressableProps,
-  ViewStyle,
-} from "react-native";
+import { ActivityIndicator, Pressable, PressableProps } from "react-native";
 import Animated, {
   Easing,
   interpolateColor,
@@ -53,10 +48,13 @@ export function Button({
     ? darkenHexColor(bgColor, 0.1)
     : "#BEC7C5";
   const isDisabled = disabled ? "opacity-60" : "opacity-100";
-  const borderStyles: ViewStyle = {
-    borderColor: accent,
-    borderWidth: 2,
-  };
+  const borderStyles =
+    variant === "outlined"
+      ? {
+          borderColor: accent,
+          borderWidth: 2,
+        }
+      : null;
   const shadowStyle = shadow
     ? {
         shadowColor: shadow.color,
