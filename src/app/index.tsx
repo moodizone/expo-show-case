@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Href, Link } from "expo-router";
+import { Href, Link, Redirect } from "expo-router";
 import { useColorScheme } from "nativewind";
 import { Text, View } from "react-native";
 
@@ -42,6 +42,11 @@ const routes = [
     url: ROUTES.contacts.root,
     label: "Contacts",
     icon: "contact-card",
+  },
+  {
+    url: ROUTES.audioRecording,
+    label: "Audio recording",
+    icon: "microphone",
   },
 ];
 
