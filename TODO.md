@@ -2,22 +2,18 @@
 
 1. **Error boundary**
 2. **Splash screen**
-3. **Audio**
-   - Recording
-   - Playback
-   - Analysis
-4. **Images**
+3. **Images**
    - Pick
    - Edit
    - Display
-5. **Maps, Navigation, and Location**
-6. **Camera & Barcode Scanning**
-7. **Sensors**
+4. **Maps, Navigation, and Location**
+5. **Camera & Barcode Scanning**
+6. **Sensors**
    - Gyroscope
    - Accelerometer
    - Others
-8. **Push Notifications & Background Tasks**
-9. **Bluetooth**
+7. **Push Notifications & Background Tasks**
+8. **Bluetooth**
    - Requires Bare Workflow
 
 ---
@@ -53,17 +49,13 @@
 
 ## ⚙️ Performance & UX
 
-- [ ] App startup optimization (preloading fonts/assets, lazy imports)
-- ✅ Smooth animations (`react-native-reanimated`)
 - [ ] Skeleton loading states (instead of spinners)
 - [ ] Pagination / Infinite scroll for large lists
-- ✅ Debounced input fields (search/filter)
 
 ---
 
 ## 📱 Device Integration
 
-- ✅ Dynamic theming (light/dark mode with context or `useColorScheme`)
 - [ ] In-app update prompts
 - [ ] Deep linking & universal links
 

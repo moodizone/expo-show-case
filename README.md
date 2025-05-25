@@ -16,6 +16,7 @@ The design is based on the beautiful [Marvie✨ iOS UI Kit - Dark Theme](https:/
 ## ✨ Features
 
 - 📞 Contact access with filtering & sorting
+- 🎙️ Audio record/playback and waveform
 - 🎨 Dynamic theming (dark/light mode)
 - 🧭 Navigation via Expo Router
 - 🚀 Optimized list rendering with FlatList
