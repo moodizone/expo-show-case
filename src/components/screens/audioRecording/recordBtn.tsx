@@ -100,7 +100,7 @@ function RecordBtn({ isRecording, isPaused, onPress }: Props) {
     <Path
       path={blurPath}
       style={"stroke"}
-      color={"#40DF9F90"}
+      color={isRecording || isPaused ? "#FF575F90" : "#40DF9F90"}
       strokeWidth={strokeWidth}
     >
       <Blur blur={strokeWidth} mode={"clamp"} />
