@@ -24,21 +24,11 @@
 
 ## 🎧 Audio Features
 
-- Record a voice using device microphone
-- Replay the recorded voice
 - Change volume dynamically
-- Control playback speed
-- Load and play an audio/music file from device storage (supported formats only)
 - Load audio file and display its metadata (e.g., duration, status)
 - Next/Previous buttons for audio playlist control
-- Countdown / display remaining duration
-- Pause / Resume playback
-- Loop playback (repeat audio)
-- Display current playback progress bar
 - Upload recording to server (e.g., for sharing or storage)
 - Show list of saved recordings
-- Handle permissions (microphone, media library, file access)
-- Display waveform of recorded/playing audio
 - Extract and display audio metadata (title, artist, album)
 - Equalizer / audio effects control
 
@@ -93,3 +83,7 @@
 - [ ] Analytics (Firebase, Amplitude, PostHog, etc.)
 - [ ] In-app feedback or bug report mechanism
 - [ ] Onboarding walkthrough / coach marks for new users
+
+Bugs:
+
+- avoid keyboard doesn't work
