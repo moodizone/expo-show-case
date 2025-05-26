@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "kafoor",
-    "slug": "kafoor",
+    "name": "expo-show-case",
+    "slug": "expo-show-case",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -16,7 +16,6 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.moodizone.kafoor"
     },
     "web": {
       "bundler": "metro",

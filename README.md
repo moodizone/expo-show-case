@@ -1,4 +1,4 @@
-# 📱 Kafoor — React Native Showcase App
+# 📱 Expo Showcase App
 
 A feature-rich showcase app built with **React Native**, **Expo Router**, and **TypeScript**.  
 This project demonstrates my skills across a wide spectrum of mobile development — from animations and permissions to maps, audio, and real-world device integration.
@@ -46,8 +46,8 @@ The design is based on the beautiful [Marvie✨ iOS UI Kit - Dark Theme](https:/
 ## 🔧 Setup
 
 ```bash
-git clone https://github.com/your-username/kafoor.git
-cd kafoor
+git clone https://github.com/your-username/expo-show-case.git
+cd expo-show-case
 yarn install
 yarn start
 ```
