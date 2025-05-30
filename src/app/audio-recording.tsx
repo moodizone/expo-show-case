@@ -120,8 +120,13 @@ export default function AudioRecording() {
   //================================
   // Render
   //================================
-  if (loading) return <LoadingAlert className="px-[30px] mt-6" />;
-  if (error) return <ErrorAlert className="px-[30px] mt-6" error={error} />;
+  if (loading) return <ScreenProvider>
+    <LoadingAlert className="px-[30px] mt-6" />
+  </ScreenProvider>
+
+  if (error) return <ScreenProvider>
+    <ErrorAlert className="px-[30px] mt-6" error={error} />
+  </ScreenProvider>
 
   return (
     <ScreenProvider>
